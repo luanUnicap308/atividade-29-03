@@ -26,10 +26,6 @@ const App = () => {
     setListIndexObjectOpen([...listIndexObjectOpen, index])
   }
 
-  useEffect(() => {
-    console.log(arrayData)
-  }, [isFetched])
-
   const handleObjectDisplayOpen = (index) => {
     const isInclude = listIndexObjectOpen.includes(index)
     isInclude ? removeItemList(index) : addItemList(index)
