@@ -7,17 +7,14 @@ const App = () => {
   const [urlBase, setUrlBase] = useState('https://swapi.dev/api/people/?page=1')
   const [indexPage, setIndexPage] = useState(1)
   const [arrayData, setArrayData] = useState();
-  // const [indexClick, setIndexClick] = useState(-1);
-  // const [isDisplay, setIsDisplay] = useState(false)
   const [listIndexObjectOpen, setListIndexObjectOpen] = useState([]);
-  const { isLoading, error, data, isFetched } = useQuery(`page${indexPage}`, () =>
+  const { isLoading, error, isFetched } = useQuery(`page${indexPage}`, () =>
     axios.get(urlBase)
       .then(res => setArrayData(res.data))
   )
 
   const removeItemList = (index) => {
-    const newListItemRemoved = listIndexObjectOpen.filter(item => item != index)
-    // return newListItemRemoved
+    const newListItemRemoved = listIndexObjectOpen.filter(item => item !== index)
     setListIndexObjectOpen(newListItemRemoved)
   }
 
@@ -34,7 +31,6 @@ const App = () => {
   }, [isFetched])
 
   const handleObjectDisplayOpen = (index) => {
-    // setIndexClick(index);
     const isInclude = listIndexObjectOpen.includes(index)
     isInclude ? removeItemList(index) : addItemList(index)
   }
@@ -67,7 +63,7 @@ const App = () => {
                   listIndexObjectOpen.length > 0 && (
                     listIndexObjectOpen.map(item => {
                       return (
-                        item == index && (
+                        item === index && (
                           <div style={{ background: 'green' }}>
                             <p>{i.gender}</p>
                             <p>{i.birth_year}</p>
