@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import { Person } from "../../components/person";
