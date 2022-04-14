@@ -1,12 +1,20 @@
-import React from 'react'
-import { Person } from '../../components/person'
-import { useParams } from "react-router-dom";
+import React, {useContext, useEffect, useState} from 'react';
+import { ContextGetPerson } from '../../context/contextGetPerson';
 
 const About = ()=>{
-    let params = useParams();
-    console.log(params.person)
+    
+    const [detailsPerson, setDetailsPerson] = useState({})
+    const personContext = useContext(ContextGetPerson);
+    useEffect(()=>{
+        setDetailsPerson({...personContext.item})
+    }, [personContext])
     return(
-        <></>
+        <div>
+            <p>{detailsPerson.name}</p>
+            <p>{detailsPerson.birth_year}</p>
+            <p>{detailsPerson.created}</p>
+            <p>{detailsPerson.edited}</p>
+        </div>
     )
 }
 
