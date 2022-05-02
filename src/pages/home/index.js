@@ -37,10 +37,23 @@ const Home = () => {
   if (error) return 'errro'
 
   return (
-    <div style={{ width: '100%', height: '100%', background: 'red' }}>
+    <div style={{ width: '100%', height: '100%', alignItems:'center', justifyContent:'center', textAlign:'center'}}>
+      <h2>clique no nome para abrir as descrições</h2>
       {isFetched && (
-        <div>
-          <h2>clique no nome para abrir as descrições</h2>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+          <div>
+            {
+              indexPage > 1 && (
+                <ButtonCircle onclick={backUrlBase} >
+                  <FaChevronLeft
+                    size={14}
+                    color={'#FFF'}
+                  />
+                </ButtonCircle>
+              )
+            }
+          </div>
+          <div>
           {data.results.map((item, index) => {
             return (
               <Person
@@ -52,29 +65,20 @@ const Home = () => {
             )
           })
           }
-        </div>
-      )}
-      <div>
-        {
-          indexPage > 1 && (
-            <ButtonCircle onclick={backUrlBase} >
-              <FaChevronLeft
+          </div>
+
+          <div>
+            <ButtonCircle onclick={nextUrlBase} >
+              <FaChevronRight
+                // focusable={{}}
                 size={14}
                 color={'#FFF'}
               />
+
             </ButtonCircle>
-          )
-        }
-
-        <ButtonCircle onclick={nextUrlBase} >
-          <FaChevronRight
-            // focusable={{}}
-            size={14}
-            color={'#FFF'}
-          />
-
-        </ButtonCircle>
-      </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
