@@ -3,6 +3,8 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 import { Person } from "../../components/person";
 import { ContextGetPerson } from "../../context/contextGetPerson";
+import { ButtonCircle } from "../../components/button";
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 const Home = () => {
 
@@ -16,14 +18,14 @@ const Home = () => {
   )
 
   const personContext = useContext(ContextGetPerson);
-  
+
   const nextUrlBase = () => {
     setIndexPage(state => state + 1);
     setUrlBase(data.next)
   }
 
-  const handlePerson = (item)=>{
-    personContext.item =  {...item}
+  const handlePerson = (item) => {
+    personContext.item = { ...item }
   }
 
   const backUrlBase = () => {
@@ -45,7 +47,7 @@ const Home = () => {
                 name={item.name}
                 key={index}
                 // url={index}
-                onClick={()=> handlePerson(item)}
+                onClick={() => handlePerson(item)}
               />
             )
           })
@@ -55,10 +57,23 @@ const Home = () => {
       <div>
         {
           indexPage > 1 && (
-            <button onClick={backUrlBase} >Back</button>
+            <ButtonCircle onclick={backUrlBase} >
+              <FaChevronLeft
+                size={14}
+                color={'#FFF'}
+              />
+            </ButtonCircle>
           )
         }
-        <button onClick={nextUrlBase}>Next</button>
+
+        <ButtonCircle onclick={nextUrlBase} >
+          <FaChevronRight
+            // focusable={{}}
+            size={14}
+            color={'#FFF'}
+          />
+
+        </ButtonCircle>
       </div>
     </div>
   );

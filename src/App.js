@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import { Routes, Route, Link } from 'react-router-dom'
 import About from "./pages/about";
 import { ContextGetPerson } from "./context/contextGetPerson";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const App = () => {
   return (
