@@ -3,6 +3,8 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 import { Person } from "../../components/person";
 import { ContextGetPerson } from "../../context/contextGetPerson";
+import { ButtonCircle } from "../../components/button";
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 const Home = () => {
 
@@ -16,14 +18,14 @@ const Home = () => {
   )
 
   const personContext = useContext(ContextGetPerson);
-  
+
   const nextUrlBase = () => {
     setIndexPage(state => state + 1);
     setUrlBase(data.next)
   }
 
-  const handlePerson = (item)=>{
-    personContext.item =  {...item}
+  const handlePerson = (item) => {
+    personContext.item = { ...item }
   }
 
   const backUrlBase = () => {
@@ -35,31 +37,49 @@ const Home = () => {
   if (error) return 'errro'
 
   return (
-    <div style={{ width: '100%', height: '100%', background: 'red' }}>
+    <div style={{ width: '100%', height: '100%', alignItems:'center', justifyContent:'center', textAlign:'center'}}>
+      <h2>clique no nome para abrir as descrições</h2>
       {isFetched && (
-        <div>
-          <h2>clique no nome para abrir as descrições</h2>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+          <div>
+            {
+              indexPage > 1 && (
+                <ButtonCircle onclick={backUrlBase} >
+                  
+                  <FaChevronLeft
+                    size={14}
+                    color={'#FFF'}
+                  />
+                </ButtonCircle>
+              )
+            }
+          </div>
+          <div>
           {data.results.map((item, index) => {
             return (
               <Person
                 name={item.name}
                 key={index}
                 // url={index}
-                onClick={()=> handlePerson(item)}
+                onClick={() => handlePerson(item)}
               />
             )
           })
           }
+          </div>
+
+          <div>
+            <ButtonCircle onclick={nextUrlBase} >
+              <FaChevronRight
+                // focusable={{}}
+                size={14}
+                color={'#FFF'}
+              />
+
+            </ButtonCircle>
+          </div>
         </div>
       )}
-      <div>
-        {
-          indexPage > 1 && (
-            <button onClick={backUrlBase} >Back</button>
-          )
-        }
-        <button onClick={nextUrlBase}>Next</button>
-      </div>
     </div>
   );
 }
