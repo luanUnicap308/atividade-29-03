@@ -45,6 +45,7 @@ const Home = () => {
             {
               indexPage > 1 && (
                 <ButtonCircle onclick={backUrlBase} >
+                  
                   <FaChevronLeft
                     size={14}
                     color={'#FFF'}
